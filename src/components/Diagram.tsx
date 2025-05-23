@@ -127,8 +127,8 @@ const Diagram: React.FC<DiagramProps> = ({ data }) => {
 
           <Panel position="top-left" className="bg-white dark:bg-gray-800 rounded-md shadow-md p-2 transition-colors duration-300">
             <div className="text-sm text-gray-700 dark:text-gray-300">
-              <span className="font-medium">Nodes:</span> {nodes.length} | 
-              <span className="font-medium ml-2">Connections:</span> {edges.length}
+              <span className="font-medium">Nodos:</span> {nodes.length} | 
+              <span className="font-medium ml-2">Conexiones:</span> {edges.length}
             </div>
           </Panel>
         </ReactFlow>
