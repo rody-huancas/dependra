@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import { BsSun } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
@@ -5,16 +6,15 @@ import { FaGithub } from "react-icons/fa";
 export const Header = () => {
   return (
     <header className="w-[80%] fixed top-5 left-1/2 -translate-x-1/2 z-10 rounded-2xl h-24 bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]">
-      <div className="container mx-auto h-full px-8 flex items-center justify-between">
-        <div className="relative w-40 h-16 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="h-full px-8 flex items-center justify-between">
+        <Link href="/" className="relative w-40 h-16 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group">
           <Image
             src="/logo-dependra.jpeg"
             alt="logo"
             fill
             className="object-cover rounded-xl"
           />
-        </div>
+        </Link>
         
         <nav className="flex items-center space-x-3">
           <a 

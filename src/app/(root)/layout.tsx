@@ -4,7 +4,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Header />
-      <main className="h-[200vh]">{children}</main>
+      <main className="pt-40 pb-10 text-foreground w-[80%] mx-auto">{children}</main>
     </>
   );
 };
