@@ -23,6 +23,7 @@ export interface NodeData {
   path         : string;
   language    ?: string;
   dependencies?: string[];
+  content     ?: string;
 }
 
 export interface EdgeData {
