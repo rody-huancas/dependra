@@ -103,7 +103,7 @@ const RepositoryInput = () => {
             Analiza tu repositorio
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Ingresa la URL de tu repositorio de GitHub para visualizar su estructura y dependencias de manera interactiva.
+            Ingresa la URL de tu repositorio de GitHub para visualizar su estructura de manera interactiva y ver el contenido de los archivos.
           </p>
 
           <form onSubmit={handleAnalyzeRepository} className="space-y-4">
