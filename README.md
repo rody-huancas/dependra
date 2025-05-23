@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dependra - Visualizador de Repositorios
 
-## Getting Started
+Dependra es una aplicación web moderna que te permite visualizar y analizar la estructura de repositorios de GitHub de manera interactiva. Con una interfaz intuitiva y características avanzadas, podrás explorar la arquitectura de tu código de forma visual.
 
-First, run the development server:
+![Dependra Preview](public/preview.png)
 
+## 🌟 Características
+
+- 🔍 Visualización interactiva de la estructura de repositorios
+- 📊 Análisis de dependencias y relaciones entre archivos
+- 🎨 Interfaz moderna y minimalista
+- 🌓 Modo claro y oscuro
+- ⚡ Rendimiento optimizado
+- 📱 Diseño responsive
+
+## 🚀 Tecnologías
+
+- **Frontend:**
+  - Next.js 15
+  - React
+  - TypeScript
+  - Tailwind CSS
+  - Monaco Editor
+  - React Icons
+  - Zustand (Gestión de estado)
+
+- **APIs:**
+  - GitHub API
+  - Octokit
+
+## 📋 Prerrequisitos
+
+- Node.js 18.0 o superior
+- npm, yarn, pnpm o bun
+- Cuenta de GitHub (para acceder a la API)
+
+## 🔧 Instalación
+
+1. Clona el repositorio:
 ```bash
+git clone https://github.com/rody-huancas/dependra
+cd dependra
+```
+
+2. Instala las dependencias:
+```bash
+# Usando npm
+npm install
+
+# Usando yarn
+yarn install
+
+# Usando pnpm
+pnpm install
+
+# Usando bun
+bun install
+```
+
+3. Renombra el ```.env.example``` por ```.env.local```, y coloca tus credenciales
+
+4. Inicia el servidor de desarrollo:
+```bash
+# Usando npm
 npm run dev
-# or
+
+# Usando yarn
 yarn dev
-# or
+
+# Usando pnpm
 pnpm dev
-# or
+
+# Usando bun
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Uso
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Ingresa la URL de un repositorio de GitHub en el campo de búsqueda
+2. Haz clic en "Analizar" para visualizar la estructura
+3. Explora los archivos y carpetas de manera interactiva
+4. Utiliza los controles para ajustar la visualización
 
-## Learn More
+## 📦 Estructura del Proyecto
 
-To learn more about Next.js, take a look at the following resources:
+```
+dependra/
+├── src/
+│   ├── app/           # Rutas y páginas (Next.js App Router)
+│   ├── components/    # Componentes React
+│   ├── services/      # Servicios y APIs
+│   ├── store/         # Estado global (Zustand)
+│   ├── styles/        # Estilos globales y configuraciones
+│   ├── types/         # Definiciones de tipos TypeScript
+│   ├── utils/         # Utilidades y helpers
+│   └── config/        # Configuraciones
+├── public/            # Archivos estáticos
+└── ...
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🤝 Contribuir
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Las contribuciones son bienvenidas. Para contribuir:
 
-## Deploy on Vercel
+1. Haz fork del proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📝 Licencia
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 👥 Autores
+
+- Rody Huancas - [@rody-huancas](https://github.com/rody-huancas)
+
+## 🙏 Agradecimientos
+
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [GitHub API](https://docs.github.com/en/rest)
+- [Octokit](https://octokit.github.io/)
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/)
