@@ -1,0 +1,9 @@
+# https://dependra.novtiq.com/robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://dependra.novtiq.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10 
