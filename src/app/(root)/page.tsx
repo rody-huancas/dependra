@@ -3,6 +3,7 @@
 import { ReactFlowProvider } from "reactflow";
 /* Components */
 import Diagram from "@/components/Diagram";
+import Controls from "@/components/Controls";
 import ErrorMessage from "@/components/ErrorMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import RepositoryInput from "@/components/RepositoryInput";
@@ -14,7 +15,7 @@ const HomePage = () => {
 
   return (
     <div className="py-2">
-      <RepositoryInput />
+      <RepositoryInput loadRepository={isLoading} />
               
       {error && <ErrorMessage message={error} />}
         
@@ -25,10 +26,12 @@ const HomePage = () => {
             <ReactFlowProvider>
               <Diagram data={visualizationData} />
             </ReactFlowProvider>
+
+            <Controls />
           </div>
         )}
     </div>
-  )
-}
+  );;
+};;
 
 export default HomePage

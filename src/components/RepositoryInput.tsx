@@ -15,7 +15,7 @@ import { REGEX_GITHUB_URL } from "@/config/constants";
 import { FaGithub } from "react-icons/fa";
 import { BsDatabase, BsSearch } from "react-icons/bs";
 
-const RepositoryInput = () => {
+const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
   const [url, setUrl] = useState("");
   const [isValidUrl, setIsValidUrl] = useState(true);
   const {
@@ -147,7 +147,7 @@ const RepositoryInput = () => {
                   "transition-colors duration-200",
                   "disabled:opacity-50 disabled:cursor-not-allowed"
                 )}
-                disabled={!isValidUrl || url === ""}
+                disabled={!isValidUrl || url === "" || loadRepository}
               >
                 <BsDatabase className="mr-2 h-5 w-5" />
                 Analizar
@@ -163,8 +163,10 @@ const RepositoryInput = () => {
                   "py-3 px-6 rounded-lg shadow-sm",
                   "flex items-center justify-center",
                   "transition-colors duration-200",
-                  "border border-gray-200 dark:border-gray-700"
+                  "border border-gray-200 dark:border-gray-700",
+                  "disabled:opacity-50 disabled:cursor-not-allowed"
                 )}
+                disabled={loadRepository}
               >
                 <FaGithub className="mr-2 h-5 w-5" />
                 Ver ejemplo
