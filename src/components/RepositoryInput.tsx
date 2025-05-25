@@ -14,13 +14,22 @@ import { REGEX_GITHUB_URL } from "@/config/constants";
 /* Icons */
 import { FaGithub } from "react-icons/fa";
 import { BsDatabase, BsSearch } from "react-icons/bs";
+import { HiMiniViewfinderCircle } from "react-icons/hi2";
 
 const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
   const [url, setUrl] = useState("");
   const [isValidUrl, setIsValidUrl] = useState(true);
-  const {
-    setRepository, setIsLoading, setError, setFileStructure, setVisualizationData, visualizationSettings
-  } = useStore();
+
+  const setError              = useStore(state => state.setError);
+  const setIsLoading          = useStore(state => state.setIsLoading);
+  const setRepository         = useStore(state => state.setRepository);
+  const setIsOpenModal        = useStore(state => state.setIsOpenModal);
+  const setFileStructure      = useStore(state => state.setFileStructure);
+  const setVisualizationData  = useStore(state => state.setVisualizationData);
+
+  const isOpenModal           = useStore(state => state.isOpenModal);
+  const visualizationData     = useStore(state => state.visualizationData);
+  const visualizationSettings = useStore(state => state.visualizationSettings);
 
   const validateUrl = (input: string): boolean => {
     return REGEX_GITHUB_URL.test(input);
@@ -52,6 +61,8 @@ const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
 
       const visualizationData = generateVisualizationData(fileStructure, visualizationSettings);
       setVisualizationData(visualizationData);
+
+      setIsOpenModal(true);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -81,6 +92,8 @@ const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
         visualizationSettings
       );
       setVisualizationData(visualizationData);
+      
+      setIsOpenModal(true);
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -92,6 +105,12 @@ const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
     }
   };
 
+  const handleViewLastRepository = () => {
+    if (!visualizationData) return;
+
+    setIsOpenModal(true);
+  }
+
   return (
     <div className="w-full max-w-4xl mx-auto mb-10">
       <div className={cn(
@@ -99,10 +118,10 @@ const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
         "rounded-2xl shadow-sm p-8 transition-all duration-300"
       )}>
         <div className="w-full">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-7 flex items-center justify-center">
+          <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white mb-7 flex items-center justify-center">
             Analiza tu repositorio
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">
+          <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm sm:text-base text-balance">
             Ingresa la URL de tu repositorio de GitHub para visualizar su estructura de manera interactiva y ver el contenido de los archivos.
           </p>
 
@@ -116,6 +135,7 @@ const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
                   type="text"
                   id="repository-url"
                   className={cn(
+                    "text-sm sm:text-base",
                     "block w-full pl-10 pr-12 py-3 rounded-lg border",
                     "bg-white dark:bg-gray-800 text-gray-900 dark:text-white",
                     "placeholder-gray-400 dark:placeholder-gray-500",
@@ -145,7 +165,8 @@ const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
                   "py-3 px-6 rounded-lg shadow-sm",
                   "flex items-center justify-center",
                   "transition-colors duration-200",
-                  "disabled:opacity-50 disabled:cursor-not-allowed"
+                  "disabled:opacity-50 disabled:cursor-not-allowed",
+                  "cursor-pointer text-sm sm:text-base"
                 )}
                 disabled={!isValidUrl || url === "" || loadRepository}
               >
@@ -164,7 +185,8 @@ const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
                   "flex items-center justify-center",
                   "transition-colors duration-200",
                   "border border-gray-200 dark:border-gray-700",
-                  "disabled:opacity-50 disabled:cursor-not-allowed"
+                  "disabled:opacity-50 disabled:cursor-not-allowed",
+                  "cursor-pointer text-sm sm:text-base"
                 )}
                 disabled={loadRepository}
               >
@@ -173,6 +195,31 @@ const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
               </button>
             </div>
           </form>
+
+          { 
+            !!visualizationData && !isOpenModal && (
+              <div className="flex w-full mt-5">
+                <button
+                  type="button"
+                  onClick={handleViewLastRepository}
+                  className={cn(
+                    "flex-1 bg-white dark:bg-gray-800",
+                    "hover:bg-gray-50 dark:hover:bg-gray-700",
+                    "text-gray-800 dark:text-white font-medium",
+                    "py-3 px-6 rounded-lg shadow-sm",
+                    "flex items-center justify-center",
+                    "transition-colors duration-200",
+                    "border border-gray-200 dark:border-gray-700",
+                    "disabled:opacity-50 disabled:cursor-not-allowed",
+                    "cursor-pointer text-sm sm:text-base"
+                  )}
+                >
+                  <HiMiniViewfinderCircle className="mr-2 h-5 w-5" />
+                  Ver último repositorio analizado
+                </button>
+              </div>
+            )
+          }
         </div>
       </div>
     </div>
