@@ -12,7 +12,7 @@ const RecentActivity = () => (
           <div className="w-4 h-4 md:w-6 md:h-6 bg-green-500 rounded-full flex items-center justify-center">
             <span className="text-white text-xs">+</span>
           </div>
-          <span className="text-gray-300 text-xs sm:text-base">Se agregó un nuevo componente</span>
+          <span className="text-gray-300 text-xs sm:text-sm">Se agregó un nuevo componente</span>
         </div>
         <span className="text-gray-400">Hace 2h</span>
       </div>
@@ -22,7 +22,7 @@ const RecentActivity = () => (
           <div className="w-4 h-4 md:w-6 md:h-6 bg-blue-500 rounded-full flex items-center justify-center">
             <span className="text-white text-xs">M</span>
           </div>
-          <span className="text-gray-300 text-xs sm:text-base">Refactorización de la capa API</span>
+          <span className="text-gray-300 text-xs sm:text-sm">Refactorización de la capa API</span>
         </div>
         <span className="text-gray-400">Hace 5h</span>
       </div>
