@@ -15,7 +15,7 @@ const AnalyzeRepository = () => {
   const visualizationData = useStore(state => state.visualizationData);
 
   return (
-    <div className="py-2">
+    <div className="h-full">
       <RepositoryInput loadRepository={isLoading} />
               
       {error && <ErrorMessage message={error} />}

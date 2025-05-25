@@ -121,7 +121,7 @@ const RepositoryInput = ({ loadRepository }: { loadRepository: boolean }) => {
           <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white mb-7 flex items-center justify-center">
             Analiza tu repositorio
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm sm:text-base text-balance">
+          <p className="text-gray-600 dark:text-gray-300 mb-6 text-sm sm:text-base">
             Ingresa la URL de tu repositorio de GitHub para visualizar su estructura de manera interactiva y ver el contenido de los archivos.
           </p>
 

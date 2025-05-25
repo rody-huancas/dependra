@@ -4,3 +4,9 @@
 body {
   font-family: var(--font-poppins);
 }
+
+.container__layout {
+  display: grid;
+  min-height: 100dvh;
+  grid-template-rows: auto 1fr auto;
+}

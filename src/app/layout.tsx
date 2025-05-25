@@ -23,7 +23,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#ffffff" />
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className={cn("antialiased relative h-dvh overflow-x-hidden", poppins.className)}  cz-shortcut-listen="true">
+      <body className={cn("antialiased relative overflow-x-hidden", poppins.className)}  cz-shortcut-listen="true">
         <div className="absolute top-0 z-[-2] h-full w-full bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
