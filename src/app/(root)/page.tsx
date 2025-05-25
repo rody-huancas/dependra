@@ -1,9 +1,8 @@
 "use client"
 
-import { ReactFlowProvider } from "reactflow";
+import { useState } from "react";
 /* Components */
-import Diagram from "@/components/Diagram";
-import Controls from "@/components/Controls";
+import DiagramModal from "@/components/DiagramModal";
 import ErrorMessage from "@/components/ErrorMessage";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import RepositoryInput from "@/components/RepositoryInput";
@@ -11,7 +10,10 @@ import RepositoryInput from "@/components/RepositoryInput";
 import useStore from "@/store/useStore";
 
 const HomePage = () => {
-  const { isLoading,  error,  visualizationData } = useStore();
+  const error             = useStore(state => state.error);
+  const isLoading         = useStore(state => state.isLoading);
+  const isOpenModal       = useStore(state => state.isOpenModal);
+  const visualizationData = useStore(state => state.visualizationData);
 
   return (
     <div className="py-2">
@@ -21,17 +23,11 @@ const HomePage = () => {
         
       {isLoading && <LoadingSpinner />}
 
-      {!isLoading && visualizationData && (
-          <div className="mt-4 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all duration-300" style={{ height: 'calc(100vh - 180px)' }}>
-            <ReactFlowProvider>
-              <Diagram data={visualizationData} />
-            </ReactFlowProvider>
-
-            <Controls />
-          </div>
-        )}
+      {!isLoading && visualizationData && isOpenModal && (
+        <DiagramModal data={visualizationData} />
+      )}
     </div>
-  );;
-};;
+  );
+};
 
-export default HomePage
+export default HomePage;

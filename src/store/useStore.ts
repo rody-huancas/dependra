@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { Repository, FileNode, VisualizationData, VisualizationSettings } from '@/types';
 
 interface VisualizerState {
+  isOpenModal                : boolean,
   repository                 : Repository | null;
   isLoading                  : boolean;
   error                      : string | null;
@@ -15,6 +16,7 @@ interface VisualizerState {
   setVisualizationData       : (data: VisualizationData | null) => void;
   updateVisualizationSettings: (settings: Partial<VisualizationSettings>) => void;
   reset                      : () => void;
+  setIsOpenModal             : (value: boolean) => void;
 }
 
 const defaultSettings: VisualizationSettings = {
@@ -26,6 +28,7 @@ const defaultSettings: VisualizationSettings = {
 };
 
 const useStore = create<VisualizerState>((set) => ({
+  isOpenModal          : false,
   repository           : null,
   isLoading            : false,
   error                : null,
@@ -38,7 +41,8 @@ const useStore = create<VisualizerState>((set) => ({
   setError            : (error)             => set({ error }),
   setFileStructure    : (fileStructure)     => set({ fileStructure }),
   setVisualizationData: (visualizationData) => set({ visualizationData }),
-  
+  setIsOpenModal      : (value: boolean)    => set({ isOpenModal: value }),
+
   updateVisualizationSettings: (partialSettings) =>
     set((state) => ({
       visualizationSettings: { ...state.visualizationSettings, ...partialSettings }
