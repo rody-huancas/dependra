@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 
 export const Header = () => {
   return (
-    <header className="w-[80%] fixed top-5 left-1/2 -translate-x-1/2 z-10 rounded-2xl h-24 bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]">
+    <header className="w-[80%] fixed top-5 left-1/2 -translate-x-1/2 z-30 rounded-2xl h-24 bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]">
       <div className="h-full px-8 flex items-center justify-between">
         <Link href="/" className="relative w-16 h-16 sm:w-40 sm:h-16 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group">
           <Image
