@@ -1,5 +1,6 @@
 import Editor from '@monaco-editor/react';
 import { CgClose } from "react-icons/cg";
+import { languageMap } from '@/utils/languageMap';
 
 interface Props {
   fileName: string;
@@ -11,40 +12,6 @@ interface Props {
 
 const FilePreview = ({ fileName, content, language, onClose }: Props) => {
   const getMonacoLanguage = (lang: string): string => {
-    const languageMap: Record<string, string> = {
-      'JavaScript'        : 'javascript',
-      'JavaScript (React)': 'javascript',
-      'TypeScript'        : 'typescript',
-      'TypeScript (React)': 'typescript',
-      'Python'            : 'python',
-      'Java'              : 'java',
-      'C#'                : 'csharp',
-      'C++'               : 'cpp',
-      'C'                 : 'c',
-      'PHP'               : 'php',
-      'Ruby'              : 'ruby',
-      'Go'                : 'go',
-      'Rust'              : 'rust',
-      'Swift'             : 'swift',
-      'Kotlin'            : 'kotlin',
-      'Scala'             : 'scala',
-      'HTML'              : 'html',
-      'CSS'               : 'css',
-      'SCSS'              : 'scss',
-      'JSON'              : 'json',
-      'Markdown'          : 'markdown',
-      'YAML'              : 'yaml',
-      'XML'               : 'xml',
-      'SQL'               : 'sql',
-      'Shell'             : 'shell',
-      'Bash'              : 'shell',
-      'PowerShell'        : 'powershell',
-      'Dockerfile'        : 'dockerfile',
-      'Makefile'          : 'makefile',
-      'INI'               : 'ini',
-      'TOML'              : 'toml',
-      'GraphQL'           : 'graphql',
-    };
     return languageMap[lang] || 'plaintext';
   };
 
