@@ -1,6 +1,6 @@
 import { FaGithub } from "react-icons/fa";
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <footer
       className="w-full py-6 mt-auto border-t border-gray-800"
@@ -35,5 +35,3 @@ const Footer = () => {
     </footer>
   );
 };
-
-export default Footer;
