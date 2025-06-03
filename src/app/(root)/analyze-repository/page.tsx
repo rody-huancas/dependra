@@ -1,5 +1,6 @@
 "use client"
 
+import { toast } from "sonner";
 /* Components */
 import DiagramModal from "@/components/DiagramModal";
 import ErrorMessage from "@/components/ErrorMessage";
@@ -13,6 +14,8 @@ const AnalyzeRepository = () => {
   const isLoading         = useStore(state => state.isLoading);
   const isOpenModal       = useStore(state => state.isOpenModal);
   const visualizationData = useStore(state => state.visualizationData);
+
+  if (error) return toast.error(error);
 
   return (
     <div className="h-full">

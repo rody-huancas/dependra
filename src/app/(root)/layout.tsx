@@ -1,3 +1,5 @@
+import { Toaster } from "sonner";
+
 import { Footer } from "@/components/common/Footer";
 import { Header } from "@/components/common/Header";
 
@@ -11,6 +13,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </main>
 
       <Footer />
+      
+      <Toaster richColors position="top-right" closeButton />
     </div>
   );
 };
