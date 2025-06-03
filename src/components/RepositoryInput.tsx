@@ -1,9 +1,9 @@
 "use client";
 
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import useStore from "@/store/useStore";
-import { REPO_DEFAULT } from "@/config/env.config";
 import { cn } from "@/utils/functions";
+import { REPO_DEFAULT } from "@/config/env.config";
 // Hooks
 import { useRepositoryAnalysis } from "@/hooks/useRepositoryAnalysis";
 import { useVisibilityWarning } from "@/hooks/useVisibilityWarning";
@@ -15,14 +15,13 @@ import VisibilityWarning from "./repository/VisibilityWarning";
 import ProgressIndicator from "./repository/ProgressIndicator";
 import RepositoryUrlInput from "./repository/RepositoryUrlInput";
 import LastRepositoryButton from "./repository/LastRepositoryButton";
+import { toast } from "sonner";
 
 interface RepositoryInputProps {
   loadRepository: boolean;
 }
 
-const RepositoryInput: React.FC<RepositoryInputProps> = ({
-  loadRepository,
-}) => {
+const RepositoryInput: React.FC<RepositoryInputProps> = ({ loadRepository, }) => {
   const [url, setUrl] = useState("");
   const [isValidUrl, setIsValidUrl] = useState(true);
 
@@ -56,6 +55,8 @@ const RepositoryInput: React.FC<RepositoryInputProps> = ({
 
       await startKeepAlive();
       await performAnalysis(url);
+      
+      toast.success("Repositorio analizado correctamente");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
@@ -77,6 +78,8 @@ const RepositoryInput: React.FC<RepositoryInputProps> = ({
 
       await startKeepAlive();
       await performAnalysis(REPO_DEFAULT);
+
+      toast.success("Repositorio analizado correctamente");
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
