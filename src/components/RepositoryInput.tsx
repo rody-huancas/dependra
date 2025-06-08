@@ -1,9 +1,11 @@
 "use client";
 
+import { toast } from "sonner";
 import { ChangeEvent, FormEvent, useState } from "react";
-import useStore from "@/store/useStore";
 import { cn } from "@/utils/functions";
 import { REPO_DEFAULT } from "@/config/env.config";
+// Store
+import useStore from "@/store/useStore";
 // Hooks
 import { useRepositoryAnalysis } from "@/hooks/useRepositoryAnalysis";
 import { useVisibilityWarning } from "@/hooks/useVisibilityWarning";
@@ -15,7 +17,6 @@ import VisibilityWarning from "./repository/VisibilityWarning";
 import ProgressIndicator from "./repository/ProgressIndicator";
 import RepositoryUrlInput from "./repository/RepositoryUrlInput";
 import LastRepositoryButton from "./repository/LastRepositoryButton";
-import { toast } from "sonner";
 
 interface RepositoryInputProps {
   loadRepository: boolean;
