@@ -15,8 +15,6 @@ const AnalyzeRepository = () => {
   const isOpenModal       = useStore(state => state.isOpenModal);
   const visualizationData = useStore(state => state.visualizationData);
 
-  if (error) return toast.error(error);
-
   return (
     <div className="h-full">
       <RepositoryInput loadRepository={isLoading} />

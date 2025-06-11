@@ -17,15 +17,25 @@ export async function getRepositoryInfo(url: string): Promise<Repository> {
 
     const [, owner, name] = match;
 
-    const { data } = await octokit.rest.repos.get({ owner, repo: name });
+    try {
+      const { data } = await octokit.rest.repos.get({ owner, repo: name });
 
-    return {
-      name         : data.name,
-      owner        : data.owner.login,
-      url          : data.html_url,
-      description  : data.description,
-      defaultBranch: data.default_branch,
-    };
+      return {
+        name         : data.name,
+        owner        : data.owner.login,
+        url          : data.html_url,
+        description  : data.description,
+        defaultBranch: data.default_branch,
+      };
+    } catch (error: any) {
+      if (error.status === 404) {
+        throw new Error("El repositorio no existe o no se encuentra disponible");
+      } else if (error.status === 403) {
+        throw new Error("No tienes acceso a este repositorio. Puede ser privado o requerir autenticación");
+      } else {
+        throw error;
+      }
+    }
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(`Ocurrió un error al obtener la información del repositorio: ${error.message}`);
