@@ -60,7 +60,14 @@ const RepositoryInput: React.FC<RepositoryInputProps> = ({ loadRepository, }) =>
       toast.success("Repositorio analizado correctamente");
     } catch (error) {
       if (error instanceof Error) {
-        setError(error.message);
+        const errorMessage = error.message;
+        if (errorMessage.includes("no existe") || errorMessage.includes("no se encuentra disponible")) {
+          setError("El repositorio no existe o no se encuentra disponible");
+        } else if (errorMessage.includes("No tienes acceso")) {
+          setError("No tienes acceso a este repositorio. Puede ser privado o requerir autenticación");
+        } else {
+          setError(errorMessage);
+        }
       } else {
         setError("Ha ocurrido un error al analizar el repositorio");
       }
@@ -83,7 +90,14 @@ const RepositoryInput: React.FC<RepositoryInputProps> = ({ loadRepository, }) =>
       toast.success("Repositorio analizado correctamente");
     } catch (error) {
       if (error instanceof Error) {
-        setError(error.message);
+        const errorMessage = error.message;
+        if (errorMessage.includes("no existe") || errorMessage.includes("no se encuentra disponible")) {
+          setError("El repositorio de ejemplo no existe o no se encuentra disponible");
+        } else if (errorMessage.includes("No tienes acceso")) {
+          setError("No tienes acceso al repositorio de ejemplo. Puede ser privado o requerir autenticación");
+        } else {
+          setError(errorMessage);
+        }
       } else {
         setError("Ocurrió un error al analizar el repositorio de ejemplo");
       }
