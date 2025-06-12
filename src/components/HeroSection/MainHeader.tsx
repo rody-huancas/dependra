@@ -16,7 +16,7 @@ const MainHeader = ({ isHovered, setIsHovered }: Props) => (
 
     <h1
       className={cn(
-        "text-4xl md:text-5xl lg:text-7xl font-black text-white mb-4 md:mb-6 leading-tight tracking-tight transition-all duration-500",
+        "text-4xl md:text-5xl lg:text-7xl font-black text-background/80 dark:text-white mb-4 md:mb-6 leading-tight tracking-tight transition-all duration-500",
         isHovered && "scale-105"
       )}
     >

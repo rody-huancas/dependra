@@ -120,7 +120,7 @@ const RepositoryInput: React.FC<RepositoryInputProps> = ({ loadRepository, }) =>
 
       <div
         className={cn(
-          "bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(26, 25, 25, 0.123)]",
+          "bg-gray-200 dark:bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(26, 25, 25, 0.123)]",
           "rounded-2xl shadow-sm p-8 transition-all duration-300"
         )}
       >

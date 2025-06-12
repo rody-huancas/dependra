@@ -11,9 +11,9 @@ export const Footer = () => {
         itemScope
         itemType="http://schema.org/WPFooter"
       >
-        <div className="text-gray-400" itemProp="copyrightNotice">
+        <p className="text-gray-700 dark:text-gray-400" itemProp="copyrightNotice">
           © {new Date().getFullYear()} Dependra. Todos los derechos reservados.
-        </div>
+        </p>
 
         <div
           className="flex items-center gap-6 z-20"
@@ -23,7 +23,7 @@ export const Footer = () => {
             href="https://github.com/rody-huancas "
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors cursor-pointer"
+            className="hover:text-white transition-colors cursor-pointer text-gray-700 dark:text-gray-400"
             aria-label="Perfil de GitHub de Rody Huancas"
             title="Ver perfil de GitHub - Rody Huancas"
             itemProp="sameAs"
