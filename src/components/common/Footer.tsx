@@ -6,13 +6,18 @@ export const Footer = () => {
       className="w-full py-6 mt-auto border-t border-gray-800"
       aria-label="Footer de la aplicación Dependra"
     >
-      <div
-        className="w-[90%] md:w-[80%] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm"
-        itemScope
-        itemType="http://schema.org/WPFooter"
-      >
-        <p className="text-gray-700 dark:text-gray-400" itemProp="copyrightNotice">
-          © {new Date().getFullYear()} Dependra. Todos los derechos reservados.
+      <div className="w-[90%] md:w-[80%] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+        <p className="text-gray-700 dark:text-gray-400 z-20">
+          © {new Date().getFullYear()} Dependra. Desarrollado por{" "}
+          <a
+            href="https://github.com/rody-huancas"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-600 cursor-pointer"
+          >
+            Rody Huancas
+          </a>
+          .
         </p>
 
         <div
