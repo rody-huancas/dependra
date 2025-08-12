@@ -2,6 +2,7 @@ import { Poppins } from 'next/font/google';
 import { cn } from '@/utils/functions';
 import { metadata } from './metadata';
 import "@/styles/globals.css";
+import { ProgressBarProvider } from '@/components/common/ProgressBarProvider';
 
 const poppins = Poppins({
   weight  : ["400", "500", "600", "700"],
@@ -20,6 +21,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={cn("antialiased relative overflow-x-hidden", poppins.className)}  cz-shortcut-listen="true">
+        <ProgressBarProvider />
+        
         <div className="absolute top-0 z-[-2] h-full w-full bg-light dark:bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0" style={{
