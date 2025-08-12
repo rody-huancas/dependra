@@ -1,10 +1,8 @@
 "use client"
 
-import { toast } from "sonner";
 /* Components */
 import DiagramModal from "@/components/DiagramModal";
 import ErrorMessage from "@/components/ErrorMessage";
-import LoadingSpinner from "@/components/LoadingSpinner";
 import RepositoryInput from "@/components/RepositoryInput";
 /* Store */
 import useStore from "@/store/useStore";
@@ -20,8 +18,6 @@ const AnalyzeRepository = () => {
       <RepositoryInput loadRepository={isLoading} />
               
       {error && <ErrorMessage message={error} />}
-        
-      {isLoading && <LoadingSpinner />}
 
       {!isLoading && visualizationData && isOpenModal && (
         <DiagramModal data={visualizationData} />
