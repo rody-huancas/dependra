@@ -33,7 +33,7 @@ const MainHeader = ({ isHovered, setIsHovered }: Props) => (
         DEPENDRA
         <br />
         <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent animate-gradient-x">
-          VISUALIZA CÓDIGO
+          VISUALIZA TU CÓDIGO
         </span>
       </h1>
 
@@ -41,32 +41,31 @@ const MainHeader = ({ isHovered, setIsHovered }: Props) => (
     </div>
 
     <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 md:mb-10 max-w-4xl mx-auto leading-relaxed">
-      Transforma cualquier repositorio de GitHub en una
+      Convierte cualquier repositorio de GitHub en una
       <span className="text-blue-600 dark:text-blue-400 font-semibold">
         {" "}
         experiencia visual interactiva
       </span>
-      . Explora dependencias, analiza estructura y comprende tu código como
-      nunca antes.
+      . Descubre dependencias, analiza la estructura y comprende tu código de forma sencilla e intuitiva.
     </p>
 
     <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8 md:mb-12">
       <div className="flex items-center gap-2 px-3 py-2 bg-white/50 dark:bg-gray-800/50 rounded-full backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
         <VscGithub className="w-4 h-4 text-blue-500" />
         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          GitHub Integration
+          Integración con GitHub
         </span>
       </div>
       <div className="flex items-center gap-2 px-3 py-2 bg-white/50 dark:bg-gray-800/50 rounded-full backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
         <GiBranchArrow className="w-4 h-4 text-purple-500" />
         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Análisis de Dependencias
+          Análisis de dependencias
         </span>
       </div>
       <div className="flex items-center gap-2 px-3 py-2 bg-white/50 dark:bg-gray-800/50 rounded-full backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
         <VscCode className="w-4 h-4 text-cyan-500" />
         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-          Visualización Interactiva
+          Visualización interactiva
         </span>
       </div>
     </div>
@@ -81,7 +80,7 @@ const MainHeader = ({ isHovered, setIsHovered }: Props) => (
         <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         <VscGithub className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" />
-        <span>Analizar Repositorio</span>
+        <span>Analizar repositorio</span>
         <HiOutlineArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
 
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-400 to-cyan-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 animate-ping" />
