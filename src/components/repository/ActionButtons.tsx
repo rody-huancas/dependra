@@ -25,7 +25,7 @@ const ActionButtons = (props: Props) => {
           "flex items-center justify-center",
           "transition-colors duration-200",
           "disabled:opacity-50 disabled:cursor-not-allowed",
-          "cursor-pointer text-sm sm:text-base"
+          "cursor-pointer text-sm sm:text-base text-nowrap"
         )}
         disabled={!isValidUrl || url === "" || loadRepository || isAnalyzing}
       >
@@ -54,7 +54,7 @@ const ActionButtons = (props: Props) => {
           "transition-colors duration-200",
           "border border-gray-200 dark:border-gray-700",
           "disabled:opacity-50 disabled:cursor-not-allowed",
-          "cursor-pointer text-sm sm:text-base"
+          "cursor-pointer text-sm sm:text-base text-nowrap"
         )}
         disabled={loadRepository || isAnalyzing}
       >
