@@ -5,12 +5,17 @@ interface Props {
 }
 
 const LoadingSpinner = ({ message }: Props) => {
-  message = message || "Cargando datos del repositorio, esto puede tardar unos minutos...";
+  const displayMessage = message || 'Cargando datos del repositorio, esto puede tardar unos minutos...';
 
   return (
-    <div className="flex flex-col items-center justify-center p-8">
-      <BiLoaderCircle className="h-12 w-12 text-blue-500 animate-spin" />
-      <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">{message}</p>
+    <div className="flex flex-col items-center justify-center min-h-64 p-8">
+      <span className="relative flex h-16 w-16">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-50"></span>
+        <BiLoaderCircle className="relative h-16 w-16 text-blue-500 animate-spin" />
+      </span>
+      <p className="mt-6 text-lg font-medium text-gray-700 dark:text-gray-300 text-center max-w-xs">
+        {displayMessage}
+      </p>
     </div>
   );
 };
