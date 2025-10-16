@@ -5,31 +5,48 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export const Header = () => {
   return (
-    <header className="w-[80%] fixed top-5 left-1/2 -translate-x-1/2 z-30 rounded-2xl h-24 bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]">
+    <header 
+      className="w-[80%] fixed top-5 left-1/2 -translate-x-1/2 z-30 rounded-2xl h-24 bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.36)]"
+      itemScope
+      itemType="https://schema.org/WPHeader"
+      role="banner"
+    >
       <div className="h-full px-8 flex items-center justify-between">
-        <Link href="/" className="relative w-16 h-16 sm:w-40 sm:h-16 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group">
+        <Link 
+          href="/" 
+          className="relative w-16 h-16 sm:w-40 sm:h-16 rounded-xl overflow-hidden hover:scale-105 transition-all duration-300 group"
+          title="Dependra - Inicio | Visualizador de Dependencias GitHub"
+          aria-label="Ir a la página de inicio de Dependra"
+        >
           <Image
             src="/logo-dependra.jpeg"
-            alt="logo"
+            alt="Dependra - Visualizador de Dependencias GitHub desarrollado por Rody Huancas"
             fill
             className="object-cover rounded-xl hidden sm:block"
+            priority
           />
           <Image
             src="/og-image.png"
-            alt="logo"
+            alt="Dependra logo"
             fill
             className="rounded-xl sm:hidden"
+            priority
           />
         </Link>
         
-        <nav className="flex items-center space-x-3">
+        <nav 
+          className="flex items-center space-x-3"
+          aria-label="Navegación principal"
+        >
           <a 
             href="https://github.com/rody-huancas/dependra" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-white/90 hover:text-white transition-all duration-300 p-2 rounded-lg hover:bg-white/10 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] cursor-pointer"
+            title="Ver repositorio de Dependra en GitHub"
+            aria-label="Repositorio de Dependra en GitHub"
           >
-            <FaGithub className="w-6 h-6 dark:text-white text-gray-700" />
+            <FaGithub className="w-6 h-6 dark:text-white text-gray-700" aria-hidden="true" />
           </a>
           <ThemeToggle />
         </nav>

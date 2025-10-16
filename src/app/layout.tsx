@@ -17,10 +17,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es">
       <head>
+        {/* Favicon and basic meta */}
         <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#ffffff" />
+        <link rel="apple-touch-icon" href="/logo-dependra.jpeg" />
+        <meta name="theme-color" content="#3b82f6" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href="https://dependra.novtiq.com" />
+        
+        {/* DNS Prefetch and Preconnect for performance */}
+        <link rel="dns-prefetch" href="https://api.github.com" />
+        <link rel="preconnect" href="https://api.github.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
         {/* JSON-LD Structured Data for SEO */}
         <script
