@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title      : 'Dependra - Visualizador de Dependencias de Repositorios GitHub',
-  description: 'Herramienta gratuita para analizar y visualizar la estructura de dependencias de repositorios GitHub. Crea diagramas interactivos, identifica dependencias obsoletas y optimiza tu código con nuestro visualizador intuitivo.',
-  keywords   : 'dependencias, github, visualizador, repositorio, arquitectura, código, análisis, diagrama, desarrollo web, programación, herramientas de desarrollo, análisis de código, visualización de datos',
+  title      : 'Dependra - Visualizador de Dependencias GitHub | Desarrollo Web por Rody Huancas',
+  description: 'Herramienta profesional de análisis y visualización de repositorios GitHub desarrollada por Rody Huancas. Analiza dependencias, arquitectura de software, estructura de código y proyectos full stack. Optimiza tu desarrollo web con diagramas interactivos y visualización de datos en tiempo real.',
+  keywords   : 'dependra, rody huancas, desarrollo web, full stack developer, arquitectura de software, análisis de código, visualización de dependencias, github, repositorio, herramientas de desarrollo, innovación tecnológica, novtiq, programación, typescript, react, next.js, diagramas interactivos, análisis de proyectos, software engineering, web development tools',
   authors    : [
     { 
       name: 'Rody Huancas',
@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   openGraph: {
-    title      : 'Dependra - Visualizador de Dependencias de Repositorios GitHub',
-    description: 'Herramienta gratuita para analizar y visualizar la estructura de dependencias de repositorios GitHub. Crea diagramas interactivos y optimiza tu código.',
+    title      : 'Dependra - Visualizador de Dependencias GitHub | Desarrollo Web por Rody Huancas',
+    description: 'Herramienta profesional de análisis y visualización de repositorios GitHub desarrollada por Rody Huancas. Analiza dependencias, arquitectura de software y estructura de código. Optimiza tu desarrollo web con diagramas interactivos.',
     url        : 'https://dependra.novtiq.com',
-    siteName   : 'Dependra',
+    siteName   : 'Dependra by Rody Huancas',
     locale     : 'es_ES',
     type       : 'website',
     images     : [
@@ -33,15 +33,15 @@ export const metadata: Metadata = {
         url   : '/og-image.png',
         width : 1200,
         height: 630,
-        alt   : 'Dependra - Visualizador de Dependencias de Repositorios GitHub',
+        alt   : 'Dependra - Visualizador de Dependencias GitHub creado por Rody Huancas - Análisis de arquitectura de software',
       },
     ],
   },
   twitter: {
     card       : 'summary_large_image',
-    title      : 'Dependra - Visualizador de Dependencias de Repositorios GitHub',
-    description: 'Herramienta gratuita para analizar y visualizar la estructura de dependencias de repositorios GitHub. Crea diagramas interactivos y optimiza tu código.',
-    images     : ['/logo-dependra.jpeg'],
+    title      : 'Dependra - Visualizador de Dependencias GitHub | Rody Huancas',
+    description: 'Herramienta profesional de análisis y visualización de repositorios GitHub. Desarrollada por Rody Huancas para analizar dependencias, arquitectura de software y estructura de código.',
+    images     : ['/og-image.png'],
     creator    : '@rodyhuancas',
     site       : '@dependra',
   },
@@ -59,17 +59,34 @@ export const metadata: Metadata = {
   category      : 'technology',
   classification: 'Web Development Tools',
   referrer      : 'origin-when-cross-origin',
-  themeColor    : '#ffffff',
+  themeColor    : '#3b82f6',
   viewport      : {
-    width       : 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
+    width                 : 'device-width',
+    initialScale          : 1,
+    maximumScale          : 5,
+    userScalable          : true,
+    viewportFit           : 'cover',
   },
   applicationName: 'Dependra',
   appleWebApp    : {
     capable       : true,
-    statusBarStyle: 'default',
+    statusBarStyle: 'black-translucent',
     title         : 'Dependra',
   },
   manifest: '/manifest.json',
+  verification: {
+    google: '',
+    yandex: '',
+    bing  : '',
+  },
+  other: {
+    'mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'apple-mobile-web-app-title': 'Dependra',
+    'application-name': 'Dependra',
+    'msapplication-TileColor': '#3b82f6',
+    'msapplication-config': '/browserconfig.xml',
+    'theme-color': '#3b82f6',
+  },
 }; 

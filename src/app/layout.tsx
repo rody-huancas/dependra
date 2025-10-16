@@ -3,6 +3,7 @@ import { cn } from '@/utils/functions';
 import { metadata } from './metadata';
 import "@/styles/globals.css";
 import { ProgressBarProvider } from '@/components/common/ProgressBarProvider';
+import { personSchema, organizationSchema, webApplicationSchema } from '@/utils/structured-data';
 
 const poppins = Poppins({
   weight  : ["400", "500", "600", "700"],
@@ -19,6 +20,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#ffffff" />
         <link rel="manifest" href="/manifest.json" />
+        <link rel="canonical" href="https://dependra.novtiq.com" />
+        
+        {/* JSON-LD Structured Data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationSchema) }}
+        />
       </head>
       <body className={cn("antialiased relative overflow-x-hidden", poppins.className)}  cz-shortcut-listen="true">
         <ProgressBarProvider />

@@ -1,26 +1,62 @@
 {
-  "name": "Dependra - Visualizador de Dependencias",
+  "name": "Dependra - Visualizador de Dependencias GitHub | Rody Huancas",
   "short_name": "Dependra",
-  "description": "Analiza y visualiza la estructura de dependencias de tu repositorio de GitHub",
+  "description": "Herramienta profesional desarrollada por Rody Huancas para analizar y visualizar la arquitectura de software y dependencias de repositorios GitHub. Optimiza tu desarrollo web con diagramas interactivos.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#3b82f6",
   "icons": [
     {
-      "src": "og-image.png",
+      "src": "logo-dependra.jpeg",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "logo-dependra.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
     },
     {
       "src": "og-image.png",
-      "sizes": "512x512",
+      "sizes": "1200x630",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
-  "orientation": "portrait",
+  "orientation": "portrait-primary",
   "lang": "es-ES",
-  "dir": "ltr"
+  "dir": "ltr",
+  "categories": [
+    "development",
+    "productivity",
+    "utilities"
+  ],
+  "screenshots": [
+    {
+      "src": "preview.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "label": "Vista principal de Dependra"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Analizar Repositorio",
+      "short_name": "Analizar",
+      "description": "Analizar un repositorio de GitHub",
+      "url": "/analyze-repository",
+      "icons": [
+        {
+          "src": "logo-dependra.jpeg",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
 } 

@@ -8,13 +8,13 @@ const HeroSection = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="relative">
-      <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center">
+    <main className="relative" role="main">
+      <article className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center">
         <MainHeader isHovered={isHovered} setIsHovered={setIsHovered} />
         
         <DashboardPreview />
-      </div>
-    </div>
+      </article>
+    </main>
   );
 };
 

@@ -1,9 +1,30 @@
 # https://dependra.novtiq.com/robots.txt
+# Dependra - Visualizador de Dependencias GitHub
+# Desarrollado por Rody Huancas
+
 User-agent: *
 Allow: /
+Allow: /analyze-repository
+
+# Disallow admin or private areas (if any in future)
+Disallow: /api/
+Disallow: /_next/
 
 # Sitemap
 Sitemap: https://dependra.novtiq.com/sitemap.xml
 
-# Crawl-delay
-Crawl-delay: 10 
+# Crawl-delay for polite crawling
+Crawl-delay: 5
+
+# Specific directives for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 5 
