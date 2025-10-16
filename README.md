@@ -10,8 +10,11 @@ Dependra es una aplicación web moderna que te permite visualizar y analizar la 
 - 📊 Análisis de dependencias y relaciones entre archivos
 - 🎨 Interfaz moderna y minimalista
 - 🌓 Modo claro y oscuro
-- ⚡ Rendimiento optimizado
+- ⚡ Rendimiento optimizado con Core Web Vitals
 - 📱 Diseño responsive
+- 🚀 SEO optimizado con JSON-LD structured data
+- ♿ Accesibilidad mejorada con HTML5 semántico
+- 🎯 Optimizado para motores de búsqueda
 
 ## 🚀 Tecnologías
 
@@ -117,6 +120,18 @@ Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) par
 ## 👥 Autores
 
 - Rody Huancas - [@rody-huancas](https://github.com/rody-huancas)
+
+## 🔍 SEO y Optimización
+
+Dependra está optimizado para motores de búsqueda con:
+
+- **JSON-LD Structured Data**: Schema.org markup para Person, Organization, WebApplication y FAQ
+- **Meta Tags Completos**: Open Graph, Twitter Cards, y meta tags optimizados
+- **Core Web Vitals**: Optimización de imágenes, compresión y carga eficiente
+- **HTML5 Semántico**: Estructura correcta con elementos semánticos
+- **Sitemap y Robots.txt**: Configuración óptima para crawlers
+- **PWA Ready**: Manifest completo para Progressive Web App
+- **Accessibility**: ARIA labels y navegación accesible
 
 ## 🙏 Agradecimientos
 

@@ -23,7 +23,7 @@ const MainHeader = ({ isHovered, setIsHovered }: Props) => (
       <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl -z-10" />
     </div>
 
-    <div className="relative mb-6 md:mb-8">
+    <header className="relative mb-6 md:mb-8">
       <h1
         className={cn(
           "text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white leading-tight tracking-tight transition-all duration-500",
@@ -38,37 +38,55 @@ const MainHeader = ({ isHovered, setIsHovered }: Props) => (
       </h1>
 
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-cyan-500/20 rounded-lg blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
-    </div>
+    </header>
 
-    <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 md:mb-10 max-w-4xl mx-auto leading-relaxed">
-      Convierte cualquier repositorio de GitHub en una
-      <span className="text-blue-600 dark:text-blue-400 font-semibold">
-        {" "}
-        experiencia visual interactiva
-      </span>
-      . Descubre dependencias, analiza la estructura y comprende tu código de forma sencilla e intuitiva.
-    </p>
+    <section className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 md:mb-10 max-w-4xl mx-auto leading-relaxed">
+      <p>
+        Convierte cualquier repositorio de GitHub en una
+        <span className="text-blue-600 dark:text-blue-400 font-semibold">
+          {" "}
+          experiencia visual interactiva
+        </span>
+        . Descubre dependencias, analiza la{" "}
+        <strong>arquitectura de software</strong> y comprende tu código de forma sencilla e intuitiva.
+      </p>
+      <p className="mt-4 text-base md:text-lg">
+        Desarrollado por{" "}
+        <a 
+          href="https://github.com/rody-huancas" 
+          target="_blank" 
+          rel="noopener noreferrer author"
+          className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+          title="Rody Huancas - Full Stack Developer"
+        >
+          Rody Huancas
+        </a>
+        , especialista en{" "}
+        <strong>desarrollo web full stack</strong> e{" "}
+        <strong>innovación tecnológica</strong>.
+      </p>
+    </section>
 
-    <div className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8 md:mb-12">
+    <nav className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8 md:mb-12" aria-label="Características principales">
       <div className="flex items-center gap-2 px-3 py-2 bg-white/50 dark:bg-gray-800/50 rounded-full backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
-        <VscGithub className="w-4 h-4 text-blue-500" />
+        <VscGithub className="w-4 h-4 text-blue-500" aria-hidden="true" />
         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
           Integración con GitHub
         </span>
       </div>
       <div className="flex items-center gap-2 px-3 py-2 bg-white/50 dark:bg-gray-800/50 rounded-full backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
-        <GiBranchArrow className="w-4 h-4 text-purple-500" />
+        <GiBranchArrow className="w-4 h-4 text-purple-500" aria-hidden="true" />
         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
           Análisis de dependencias
         </span>
       </div>
       <div className="flex items-center gap-2 px-3 py-2 bg-white/50 dark:bg-gray-800/50 rounded-full backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
-        <VscCode className="w-4 h-4 text-cyan-500" />
+        <VscCode className="w-4 h-4 text-cyan-500" aria-hidden="true" />
         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
           Visualización interactiva
         </span>
       </div>
-    </div>
+    </nav>
 
     <div className="relative group mb-20">
       <Link

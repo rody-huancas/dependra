@@ -1,4 +1,14 @@
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "404 - Página No Encontrada | Dependra",
+  description: "La página que buscas no existe. Vuelve a la página principal de Dependra para analizar repositorios GitHub.",
+  robots: {
+    index: false,
+    follow: true,
+  },
+};
 
 export default function NotFound() {
   return (
