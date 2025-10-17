@@ -77,7 +77,6 @@ export const metadata: Metadata = {
   verification: {
     google: '',
     yandex: '',
-    bing  : '',
   },
   other: {
     'mobile-web-app-capable': 'yes',
