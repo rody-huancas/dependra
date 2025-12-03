@@ -18,7 +18,7 @@ const AnalyzeRepository = () => {
     <div className="h-full">
       <Breadcrumbs items={[{ name: "Analizar Repositorio" }]} />
       
-      <section className="mb-8">
+      <section className="mb-8 text-center">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
           Analizar Repositorio GitHub
         </h1>
