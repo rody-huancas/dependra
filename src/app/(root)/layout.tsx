@@ -1,5 +1,4 @@
 import { Toaster } from "sonner";
-
 import { Footer } from "@/components/common/Footer";
 import { Header } from "@/components/common/Header";
 
