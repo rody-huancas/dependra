@@ -50,21 +50,6 @@ const MainHeader = ({ isHovered, setIsHovered }: Props) => (
         . Descubre dependencias, analiza la{" "}
         <strong>arquitectura de software</strong> y comprende tu código de forma sencilla e intuitiva.
       </p>
-      <p className="mt-4 text-base md:text-lg">
-        Desarrollado por{" "}
-        <a 
-          href="https://github.com/rody-huancas" 
-          target="_blank" 
-          rel="noopener noreferrer author"
-          className="text-blue-600 dark:text-blue-400 font-semibold hover:underline"
-          title="Rody Huancas - Full Stack Developer"
-        >
-          Rody Huancas
-        </a>
-        , especialista en{" "}
-        <strong>desarrollo web full stack</strong> e{" "}
-        <strong>innovación tecnológica</strong>.
-      </p>
     </section>
 
     <nav className="flex flex-wrap justify-center gap-4 md:gap-6 mb-8 md:mb-12" aria-label="Características principales">
