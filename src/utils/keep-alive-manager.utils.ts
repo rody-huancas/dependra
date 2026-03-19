@@ -68,26 +68,7 @@ export class KeepAliveManager {
 
   private createHeartbeatWorker(): void {
     try {
-      const workerCode = `
-          let interval;
-          self.onmessage = function(e) {
-            if (e.data === 'start') {
-              interval = setInterval(() => {
-                const now    = Date.now();
-                const random = Math.random();
-                self.postMessage({ type: 'heartbeat', timestamp: now, random });
-              }, 100);
-            } else if (e.data === 'stop') {
-              if (interval) {
-                clearInterval(interval);
-                interval = null;
-              }
-            }
-          };
-        `;
-
-      const blob  = new Blob([workerCode], { type: "application/javascript" });
-      this.heartbeatWorker = new Worker(URL.createObjectURL(blob));
+      this.heartbeatWorker = new Worker(new URL("./keep-alive.worker.ts", import.meta.url), { type: "module" });
 
       this.heartbeatWorker.onmessage = (e) => {
         if (e.data.type === "heartbeat") {
