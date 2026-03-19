@@ -52,6 +52,8 @@ export function generateVisualizationData(fileStructure: FileNode, settings: Vis
       language    : node.language,
       dependencies: node.dependencies,
       content     : node.content,
+      encoding    : node.encoding,
+      mimeType    : node.mimeType,
     };
 
     let position;
