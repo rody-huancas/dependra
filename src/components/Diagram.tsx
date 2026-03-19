@@ -12,6 +12,7 @@ import ReactFlow, {
   useReactFlow,
   ReactFlowProvider,
 } from 'reactflow';
+import { toast } from 'sonner';
 /* Utils */
 import { cn } from '@/utils/functions';
 /* Types */
@@ -22,6 +23,8 @@ import useStore from '@/store/useStore';
 import FilePreview from '@/components/FilePreview';
 import FileNodeComponent from '@/components/nodes/FileNode';
 import DirectoryNodeComponent from '@/components/nodes/DirectoryNode';
+/* Services */
+import { getRepositoryFileContent } from '@/services/github.service';
 /* Styles */
 import 'reactflow/dist/style.css';
 
@@ -38,7 +41,9 @@ interface DiagramProps {
 }
 
 const Diagram: React.FC<DiagramProps> = ({ data }) => {
-  const { visualizationSettings } = useStore();
+  const visualizationSettings = useStore((state) => state.visualizationSettings);
+  const repository = useStore((state) => state.repository);
+  const setError = useStore((state) => state.setError);
   
   const reactFlowInstance = useReactFlow();
   const reactFlowWrapper  = useRef<HTMLDivElement>(null);
@@ -50,7 +55,10 @@ const Diagram: React.FC<DiagramProps> = ({ data }) => {
     name    : string;
     content : string;
     language: string;
+    encoding?: "text" | "base64";
+    mimeType?: string;
   } | null>(null);
+  const [loadingNodeId, setLoadingNodeId] = useState<string | null>(null);
 
   useEffect(() => {
     if (data) {
@@ -67,15 +75,97 @@ const Diagram: React.FC<DiagramProps> = ({ data }) => {
     return 'file';
   };
 
-  const onNodeClick = useCallback((event: React.MouseEvent, node: Node) => {
-    if (node.data.type !== 'directory' && node.data.content) {
-      setSelectedFile({
-        name    : node.data.label,
-        content : node.data.content,
-        language: node.data.language || 'plaintext'
-      });
-    }
-  }, []);
+  const updateNodeContent = useCallback(
+    (
+      nodeId: string,
+      content: string,
+      dependencies?: string[] ,
+      encoding?: "text" | "base64",
+      mimeType?: string,
+    ) => {
+      setNodes((currentNodes) =>
+        currentNodes.map((currentNode) =>
+          currentNode.id === nodeId
+            ? {
+                ...currentNode,
+                data: {
+                  ...currentNode.data,
+                  content,
+                  dependencies: dependencies ?? currentNode.data.dependencies,
+                  encoding: encoding ?? currentNode.data.encoding,
+                  mimeType : mimeType ?? currentNode.data.mimeType,
+                },
+              }
+            : currentNode
+        )
+      );
+    },
+    [setNodes]
+  );
+
+  const onNodeClick = useCallback(
+    (event: React.MouseEvent, node: Node) => {
+      if (node.data.type === 'directory') {
+        return;
+      }
+
+      if (node.data.content) {
+        setSelectedFile({
+          name    : node.data.label,
+          content : node.data.content,
+          language: node.data.language || 'plaintext',
+          encoding: node.data.encoding,
+          mimeType: node.data.mimeType,
+        });
+        return;
+      }
+
+      if (!repository) {
+        toast.error('No se pudo obtener información del repositorio actual');
+        setError('No se pudo obtener información del repositorio actual');
+        return;
+      }
+
+      if (!node.data.path || loadingNodeId === node.id) {
+        return;
+      }
+
+      setLoadingNodeId(node.id);
+
+      (async () => {
+        try {
+          const payload = await getRepositoryFileContent({
+            owner : repository.owner,
+            repo  : repository.name,
+            branch: repository.defaultBranch,
+            path  : node.data.path as string,
+          });
+
+          updateNodeContent(
+            node.id,
+            payload.content,
+            payload.dependencies,
+            payload.encoding,
+            payload.mimeType,
+          );
+
+          setSelectedFile({
+            name    : node.data.label,
+            content : payload.content,
+            language: node.data.language || 'plaintext',
+            encoding: payload.encoding,
+            mimeType: payload.mimeType,
+          });
+        } catch (error) {
+          toast.error('No se pudo cargar el archivo seleccionado');
+          setError('No se pudo cargar el archivo seleccionado');
+        } finally {
+          setLoadingNodeId(null);
+        }
+      })();
+    },
+    [repository, setError, updateNodeContent, loadingNodeId, setSelectedFile]
+  );
 
   useEffect(() => {
     if (reactFlowInstance && nodes.length > 0) {
@@ -133,12 +223,21 @@ const Diagram: React.FC<DiagramProps> = ({ data }) => {
           </Panel>
         </ReactFlow>
       </ReactFlowProvider>
-      
+
+      {loadingNodeId && (
+        <div className="absolute bottom-4 left-4 z-10 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg text-sm font-medium text-gray-700 dark:text-gray-200 flex items-center gap-2">
+          <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+          Cargando archivo...
+        </div>
+      )}
+
       {selectedFile && (
         <FilePreview
           fileName={selectedFile.name}
           content={selectedFile.content}
           language={selectedFile.language}
+          encoding={selectedFile.encoding}
+          mimeType={selectedFile.mimeType}
           onClose={() => setSelectedFile(null)}
         />
       )}

@@ -15,6 +15,9 @@ export interface FileNode {
   children    ?: FileNode[];
   dependencies?: string[];
   language    ?: string;
+  encoding    ?: "text" | "base64";
+  mimeType    ?: string;
+  isBinary    ?: boolean;
 }
 
 export interface NodeData {
@@ -24,6 +27,8 @@ export interface NodeData {
   language    ?: string;
   dependencies?: string[];
   content     ?: string;
+  encoding    ?: "text" | "base64";
+  mimeType    ?: string;
 }
 
 export interface EdgeData {

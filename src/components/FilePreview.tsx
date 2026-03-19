@@ -6,14 +6,18 @@ interface Props {
   fileName: string;
   content : string;
   language: string;
+  encoding?: "text" | "base64";
+  mimeType?: string;
   onClose : () => void;
 }
 
 
-const FilePreview = ({ fileName, content, language, onClose }: Props) => {
+const FilePreview = ({ fileName, content, language, encoding, mimeType, onClose }: Props) => {
   const getMonacoLanguage = (lang: string): string => {
     return languageMap[lang] || 'plaintext';
   };
+
+  const isImagePreview = encoding === 'base64' && mimeType?.startsWith('image/');
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
@@ -21,7 +25,9 @@ const FilePreview = ({ fileName, content, language, onClose }: Props) => {
         <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
           <div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{fileName}</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">{language}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              {isImagePreview ? mimeType : language}
+            </p>
           </div>
           <button
             onClick={onClose}
@@ -31,22 +37,32 @@ const FilePreview = ({ fileName, content, language, onClose }: Props) => {
           </button>
         </div>
         <div className="flex-1 overflow-hidden">
-          <Editor
-            height="100%"
-            defaultLanguage={getMonacoLanguage(language)}
-            defaultValue={content}
-            theme={'vs-dark'}
-            options={{
-              readOnly: true,
-              minimap: { enabled: true },
-              fontSize: 14,
-              wordWrap: 'on',
-              lineNumbers: 'on',
-              folding: true,
-              renderWhitespace: 'none',
-              scrollBeyondLastLine: false,
-            }}
-          />
+          {isImagePreview ? (
+            <div className="w-full h-full flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+              <img
+                src={`data:${mimeType};base64,${content}`}
+                alt={fileName}
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+          ) : (
+            <Editor
+              height="100%"
+              defaultLanguage={getMonacoLanguage(language)}
+              defaultValue={content}
+              theme={'vs-dark'}
+              options={{
+                readOnly: true,
+                minimap: { enabled: true },
+                fontSize: 14,
+                wordWrap: 'on',
+                lineNumbers: 'on',
+                folding: true,
+                renderWhitespace: 'none',
+                scrollBeyondLastLine: false,
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
