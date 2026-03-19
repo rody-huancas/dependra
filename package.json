@@ -11,6 +11,7 @@
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
     "clsx": "^2.1.1",
+    "cytoscape": "^3.33.1",
     "next": "15.3.8",
     "next-nprogress-bar": "^2.4.7",
     "octokit": "^5.0.2",
@@ -23,11 +24,11 @@
     "zustand": "^5.0.5"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
