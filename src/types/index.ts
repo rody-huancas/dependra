@@ -42,6 +42,7 @@ export interface VisualizationSettings {
   showDependencies: boolean;
   groupByFolder   : boolean;
   hideNodeTypes   : string[];
+  density        ?: "compact" | "balanced" | "spacious";
 }
 
 export interface VisualizationData {

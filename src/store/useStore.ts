@@ -28,6 +28,7 @@ const defaultSettings: VisualizationSettings = {
   showDependencies: true,
   groupByFolder   : true,
   hideNodeTypes   : [],
+  density         : 'spacious',
 };
 
 const useStore = create<VisualizerState>()(

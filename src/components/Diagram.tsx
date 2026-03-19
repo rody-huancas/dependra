@@ -1,13 +1,12 @@
 import { useCallback, useRef, useEffect, useState } from 'react';
 import ReactFlow, {
   Background,
-  Controls,
+  Controls as ReactFlowControls,
   MiniMap,
   useNodesState,
   useEdgesState,
   Node,
   NodeTypes,
-  Panel,
   BackgroundVariant,
   useReactFlow,
   ReactFlowProvider,
@@ -23,6 +22,8 @@ import useStore from '@/store/useStore';
 import FilePreview from '@/components/FilePreview';
 import FileNodeComponent from '@/components/nodes/FileNode';
 import DirectoryNodeComponent from '@/components/nodes/DirectoryNode';
+import FlowOptionsPanel from '@/components/Controls';
+import RepositoryNetworkView from '@/components/RepositoryNetworkView';
 /* Services */
 import { getRepositoryFileContent } from '@/services/github.service';
 /* Styles */
@@ -43,6 +44,7 @@ interface DiagramProps {
 const Diagram: React.FC<DiagramProps> = ({ data }) => {
   const visualizationSettings = useStore((state) => state.visualizationSettings);
   const repository = useStore((state) => state.repository);
+  const fileStructure = useStore((state) => state.fileStructure);
   const setError = useStore((state) => state.setError);
   
   const reactFlowInstance = useReactFlow();
@@ -59,6 +61,7 @@ const Diagram: React.FC<DiagramProps> = ({ data }) => {
     mimeType?: string;
   } | null>(null);
   const [loadingNodeId, setLoadingNodeId] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<'flow' | 'network'>('flow');
 
   useEffect(() => {
     if (data) {
@@ -103,19 +106,36 @@ const Diagram: React.FC<DiagramProps> = ({ data }) => {
     [setNodes]
   );
 
-  const onNodeClick = useCallback(
-    (event: React.MouseEvent, node: Node) => {
-      if (node.data.type === 'directory') {
+  const openFilePreview = useCallback(
+    async ({
+      nodeId,
+      label,
+      path,
+      language,
+      content,
+      encoding,
+      mimeType,
+    }: {
+      nodeId?: string;
+      label : string;
+      path ?: string;
+      language?: string;
+      content ?: string;
+      encoding?: "text" | "base64";
+      mimeType?: string;
+    }) => {
+      if (!path) {
+        toast.error('No se encontró la ruta del archivo seleccionado');
         return;
       }
 
-      if (node.data.content) {
+      if (content) {
         setSelectedFile({
-          name    : node.data.label,
-          content : node.data.content,
-          language: node.data.language || 'plaintext',
-          encoding: node.data.encoding,
-          mimeType: node.data.mimeType,
+          name    : label,
+          content,
+          language: language || 'plaintext',
+          encoding,
+          mimeType,
         });
         return;
       }
@@ -126,45 +146,64 @@ const Diagram: React.FC<DiagramProps> = ({ data }) => {
         return;
       }
 
-      if (!node.data.path || loadingNodeId === node.id) {
-        return;
-      }
+      const loadingId = nodeId ?? path;
+      setLoadingNodeId(loadingId);
 
-      setLoadingNodeId(node.id);
+      try {
+        const payload = await getRepositoryFileContent({
+          owner : repository.owner,
+          repo  : repository.name,
+          branch: repository.defaultBranch,
+          path,
+        });
 
-      (async () => {
-        try {
-          const payload = await getRepositoryFileContent({
-            owner : repository.owner,
-            repo  : repository.name,
-            branch: repository.defaultBranch,
-            path  : node.data.path as string,
-          });
-
+        if (nodeId) {
           updateNodeContent(
-            node.id,
+            nodeId,
             payload.content,
             payload.dependencies,
             payload.encoding,
             payload.mimeType,
           );
-
-          setSelectedFile({
-            name    : node.data.label,
-            content : payload.content,
-            language: node.data.language || 'plaintext',
-            encoding: payload.encoding,
-            mimeType: payload.mimeType,
-          });
-        } catch (error) {
-          toast.error('No se pudo cargar el archivo seleccionado');
-          setError('No se pudo cargar el archivo seleccionado');
-        } finally {
-          setLoadingNodeId(null);
         }
-      })();
+
+        setSelectedFile({
+          name    : label,
+          content : payload.content,
+          language: language || 'plaintext',
+          encoding: payload.encoding,
+          mimeType: payload.mimeType,
+        });
+      } catch (error) {
+        toast.error('No se pudo cargar el archivo seleccionado');
+        setError('No se pudo cargar el archivo seleccionado');
+      } finally {
+        setLoadingNodeId(null);
+      }
     },
-    [repository, setError, updateNodeContent, loadingNodeId, setSelectedFile]
+    [repository, setError, updateNodeContent]
+  );
+
+  const onNodeClick = useCallback(
+    (event: React.MouseEvent, node: Node) => {
+      if (node.data.type === 'directory') {
+        return;
+      }
+      if (!node.data.path || loadingNodeId === node.id) {
+        return;
+      }
+
+      openFilePreview({
+        nodeId: node.id,
+        label : node.data.label,
+        path  : node.data.path,
+        language: node.data.language,
+        content : node.data.content,
+        encoding: node.data.encoding,
+        mimeType: node.data.mimeType,
+      });
+    },
+    [openFilePreview, loadingNodeId]
   );
 
   useEffect(() => {
@@ -176,53 +215,87 @@ const Diagram: React.FC<DiagramProps> = ({ data }) => {
   }, [reactFlowInstance, nodes.length]);
 
   const isDarkTheme = visualizationSettings.theme === 'dark';
+  const viewTabs: Array<{ id: 'flow' | 'network'; label: string }> = [
+    { id: 'flow', label: 'Vista interactiva' },
+    { id: 'network', label: 'Red jerárquica' },
+  ];
 
   return (
     <div className="w-full h-full relative" ref={reactFlowWrapper}>
-      <ReactFlowProvider>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onNodeClick={onNodeClick}
-          nodeTypes={nodeTypes}
-          fitView
-          minZoom={0.1}
-          maxZoom={2}
-          defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
-          proOptions={{ hideAttribution: true }}
-          className={cn(
-            isDarkTheme ? 'dark-theme' : 'light-theme',
-            'transition-colors duration-300'
-          )}
-        >
-          <Background
-            variant={BackgroundVariant.Dots}
-            color={isDarkTheme ? '#4a5568' : '#e2e8f0'}
-            size={1}
-            gap={16}
-          />
+      <div className="absolute top-6 left-6 z-20 flex gap-2">
+        {viewTabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setViewMode(tab.id)}
+            className={cn(
+              'rounded-full border px-4 py-1.5 text-xs font-semibold transition',
+              viewMode === tab.id
+                ? 'border-blue-500 bg-blue-50/90 text-blue-700 dark:bg-blue-500/20 dark:text-blue-100'
+                : 'border-gray-200 dark:border-white/10 text-gray-600 dark:text-gray-300 hover:border-blue-300'
+            )}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
 
-          <Controls position="bottom-right" showInteractive={false} />
+      {viewMode === 'flow' ? (
+        <ReactFlowProvider>
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onNodeClick={onNodeClick}
+            nodeTypes={nodeTypes}
+            fitView
+            minZoom={0.1}
+            maxZoom={2}
+            defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+            proOptions={{ hideAttribution: true }}
+            className={cn(
+              isDarkTheme ? 'dark-theme' : 'light-theme',
+              'transition-colors duration-300'
+            )}
+          >
+            <Background
+              variant={BackgroundVariant.Dots}
+              color={isDarkTheme ? '#4a5568' : '#e2e8f0'}
+              size={1}
+              gap={16}
+            />
 
-          <MiniMap
-            nodeStrokeWidth={3}
-            zoomable
-            pannable
-            position="top-right"
-            nodeColor={isDarkTheme ? '#e2e8f0' : '#4a5568'}
-            maskColor={isDarkTheme ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)'}
-          />
+            <ReactFlowControls position="bottom-right" showInteractive={false} />
 
-          <Panel position="top-left" className="bg-white dark:bg-gray-800 rounded-md shadow-md p-2 transition-colors duration-300">
-            <div className="text-sm text-gray-700 dark:text-gray-300">
-              <span className="font-medium">Nodos:</span> {nodes.length} | 
-              <span className="font-medium ml-2">Conexiones:</span> {edges.length}
-            </div>
-          </Panel>
-        </ReactFlow>
-      </ReactFlowProvider>
+            <MiniMap
+              nodeStrokeWidth={3}
+              zoomable
+              pannable
+              position="top-right"
+              nodeColor={isDarkTheme ? '#e2e8f0' : '#4a5568'}
+              maskColor={isDarkTheme ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.2)'}
+            />
+          </ReactFlow>
+        </ReactFlowProvider>
+      ) : (
+        <RepositoryNetworkView
+          root={fileStructure}
+          density={visualizationSettings.density ?? 'balanced'}
+          onOpenFile={(node) =>
+            openFilePreview({
+              nodeId  : node.path || node.name,
+              label   : node.name,
+              path    : node.path,
+              language: node.language,
+              content : node.content,
+              encoding: node.encoding,
+              mimeType: node.mimeType,
+            })
+          }
+        />
+      )}
+
+      {viewMode === 'flow' && <FlowOptionsPanel />}
 
       {loadingNodeId && (
         <div className="absolute bottom-4 left-4 z-10 px-4 py-2 rounded-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg text-sm font-medium text-gray-700 dark:text-gray-200 flex items-center gap-2">
