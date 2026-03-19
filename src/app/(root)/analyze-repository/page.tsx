@@ -17,17 +17,6 @@ const AnalyzeRepository = () => {
   return (
     <div className="h-full">
       <Breadcrumbs items={[{ name: "Analizar Repositorio" }]} />
-      
-      <section className="mb-8 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          Analizar Repositorio GitHub
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-300">
-          Introduce la URL de un repositorio de GitHub para visualizar su{" "}
-          <strong>arquitectura de software</strong> y analizar las{" "}
-          <strong>dependencias del proyecto</strong>.
-        </p>
-      </section>
 
       <RepositoryInput loadRepository={isLoading} />
               
