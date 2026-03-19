@@ -6,10 +6,16 @@ export function generateVisualizationData(fileStructure: FileNode, settings: Vis
 
   const processedNodes = new Set<string>();
 
-  let   currentX    = 0;
-  let   currentY    = 0;
-  const levelHeight = 100;
-  const nodeWidth   = 180;
+  const densityPreset = {
+    compact : { levelHeight: 70,  nodeWidth: 140, radialGap: 140, stackGap: 60 },
+    balanced: { levelHeight: 100, nodeWidth: 180, radialGap: 200, stackGap: 80 },
+    spacious: { levelHeight: 150, nodeWidth: 240, radialGap: 260, stackGap: 110 },
+  } as const;
+
+  const activeDensity = settings.density ?? "balanced";
+  const { levelHeight, nodeWidth, radialGap, stackGap } = densityPreset[activeDensity];
+
+  const levelOffsets: Record<number, number> = {};
 
   function processNode(
     node    : FileNode,
@@ -58,14 +64,16 @@ export function generateVisualizationData(fileStructure: FileNode, settings: Vis
 
     let position;
     if (settings.layout === "horizontal") {
-      position =  { x: level * nodeWidth, y: currentY };
-      currentY += levelHeight;
+      const offset = levelOffsets[level] ?? 0;
+      position = { x: level * nodeWidth, y: offset * stackGap };
+      levelOffsets[level] = offset + 1;
     } else if (settings.layout === "vertical") {
-      position =  { x: currentX, y: level * levelHeight };
-      currentX += nodeWidth;
+      const offset = levelOffsets[level] ?? 0;
+      position = { x: offset * stackGap, y: level * levelHeight };
+      levelOffsets[level] = offset + 1;
     } else {
       const angle  = (nodes.length / 10) * Math.PI * 2;
-      const radius = level * 200;
+      const radius = level * radialGap;
       position = {
         x: Math.cos(angle) * radius + 500,
         y: Math.sin(angle) * radius + 500,
@@ -119,16 +127,6 @@ export function generateVisualizationData(fileStructure: FileNode, settings: Vis
   }
 
   processNode(fileStructure, 0);
-
-  if (settings.layout === "horizontal" || settings.layout === "vertical") {
-    nodes.forEach((node, i) => {
-      if (settings.layout === "horizontal") {
-        node.position.y = i * 80;
-      } else {
-        node.position.x = i * 180;
-      }
-    });
-  }
 
   return { nodes, edges };
 }
